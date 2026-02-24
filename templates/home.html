@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BroCode - Home</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at top, #1a1a1a, #000);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(#222 1px, transparent 1px),
+                linear-gradient(90deg, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            z-index: -2;
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #0ff;
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-90px); opacity: 0.2; }
+        }
+
+        /* HEADER FIXED */
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO bigger */
+        .logo svg {
+            width: 200px; /* increased 30% */
+            height: auto;
+        }
+
+        /* NAVIGATION FIXED */
+        nav {
+    display: flex;
+    gap: 28px;          /* spacing between Home / Login / Register */
+    margin-right: 90px; /* moves nav LEFT — adjust number if needed */
+}
+
+        nav a {
+            color: #0ff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.4s;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 120px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+
+        .subtext {
+            margin-top: 10px;
+            font-size: 16px;
+            opacity: 0.8;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-box {
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 8px;
+            border: none;
+            background: #0ff;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0 10px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #00d9d9;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            opacity: 0.5;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid"></div>
+
+    <!-- Floating particles -->
+    <div class="particle" style="left: 20%; top: 70%; animation-delay: 0s;"></div>
+    <div class="particle" style="left: 80%; top: 60%; animation-delay: 1s;"></div>
+    <div class="particle" style="left: 50%; top: 85%; animation-delay: 2s;"></div>
+    <div class="particle" style="left: 30%; top: 40%; animation-delay: 3s;"></div>
+    <div class="particle" style="left: 60%; top: 50%; animation-delay: 1.5s;"></div>
+
+    <header>
+
+        <!-- LOGO SVG -->
+       <div class="logo">
+    <svg width="180" height="auto" viewBox="0 0 750 200" xmlns="http://www.w3.org/2000/svg">
+        
+        <!-- White Text -->
+        <text id="mainText" x="20" y="100"
+            font-family="Montserrat, sans-serif"
+            font-weight="300"
+            font-size="95"
+            fill="white">
+            BROCDE
+        </text>
+
+        <!-- Circle #00d9d9 -->
+        <circle cx="265" cy="66" r="12"
+            stroke="#00d9d9"
+            stroke-width="4"
+            fill="none" />
+    </svg>
+</div>
+
+        <!-- NAVIGATION (perfect alignment now) -->
+        <nav>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+            
+        </nav>
+
+    </header>
+
+    <section class="hero">
+        <h1>Level Up Your Coding Journey</h1>
+
+        <p class="subtext">
+            Learn programming step-by-step, unlock stages, and build real-world skills.
+        </p>
+
+        <div class="btn-box">
+            <a href="/login"><button class="btn">Get Started</button></a>
+            <a href="/register"><button class="btn">Create Account</button></a>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 BroCode — Learn. Level Up. Dominate.
+    </footer>
+
+</body>
+</html>

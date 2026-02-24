@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BroCode Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top, #1a1a1a, #000);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .grid {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(#222 1px, transparent 1px),
+                linear-gradient(90deg, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.25;
+            z-index: -1;
+        }
+
+        /* ================= NAVBAR ================== */
+        nav {
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(20,20,20,0.5);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(8px);
+        }
+
+        nav a {
+            font-size: 20px;
+            margin-left: 25px;
+            color: #0ff;
+            text-decoration: none;
+        }
+        nav a:hover { color: white; }
+
+        /* cards */
+        .container {
+            text-align: center;
+            margin-top: 80px;
+        }
+        .welcome {
+            font-family: 'Orbitron';
+            font-size: 30px;
+            letter-spacing: 2px;
+        }
+        .subtitle { opacity: 0.7; margin-top: -5px; }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card {
+            width: 290px;
+            padding: 25px;
+            background: rgba(20,20,20,0.65);
+            border: 1px solid #333;
+            border-radius: 15px;
+            backdrop-filter: blur(12px);
+            transition: 0.25s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #0ff;
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+        }
+        .card h3 { font-family: Orbitron; color: #0ff; }
+    </style>
+</head>
+
+<body>
+
+<div class="grid"></div>
+
+<!-- ==================== FIXED NAVBAR ===================== -->
+
+<nav>
+
+    <!-- LEFT MENU -->
+    <div style="display:flex; gap:25px;">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- RIGHT PROFILE (clickable) -->
+    <div>
+        <a href="/profile">
+            {% if session.profile_pic %}
+                <img src="{{ url_for('static', filename='profile_pics/' + session.profile_pic) }}"
+                     style="width:55px;height:55px;border-radius:50%;object-fit:cover;
+                     border:2px solid #0ff;box-shadow:0 0 10px #0ff;">
+            {% else %}
+                <img src="{{ url_for('static', filename='profile_pics/default.png') }}"
+                     style="width:55px;height:55px;border-radius:50%;object-fit:cover;
+                     border:2px solid #0ff;box-shadow:0 0 10px #0ff;">
+            {% endif %}
+        </a>
+    </div>
+
+</nav>
+
+<!-- ==================== MAIN CONTENT ===================== -->
+
+<div class="container">
+
+    <div class="welcome">
+        Welcome, {{ session['username'] }} 👋
+    </div>
+
+    <p class="subtitle">Your personal coding dashboard — choose where to start.</p>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🚀 Start Learning</h3>
+            <p>Access coding lessons, challenges, and interactive content.</p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Track Progress</h3>
+            <p>View your completed modules and performance analytics.</p>
+        </div>
+
+        <a href="/profile" style="text-decoration:none;color:inherit;">
+            <div class="card">
+                <h3>👤 Profile</h3>
+                <p>Update info, change password, personalize account.</p>
+            </div>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

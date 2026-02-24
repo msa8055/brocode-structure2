@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BroCode</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top, #1a1a1a, #000);
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Background Grid */
+        .grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(#222 1px, transparent 1px),
+                linear-gradient(90deg, #222 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.25;
+            z-index: -2;
+        }
+
+        /* Glass Panel */
+        .container {
+            width: 380px;
+            padding: 35px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #00eaff;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid #00eaff;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #b7ffff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: #00eaff;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #00d1d1;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        a {
+            color: #00eaff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        /* Password strength bar */
+        .strength {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 10px;
+            margin-top: -5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 6px;
+            width: 0%;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        /* Success popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid #00eaff;
+            padding: 25px 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px #00eaff;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 18px;
+            color: #00eaff;
+            display: none;
+            z-index: 1000;
+        }
+        .flash {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flash.error {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.flash.success {
+    background-color: #4CAF50;
+    color: white;
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="grid"></div>
+
+    <!-- SUCCESS POPUP -->
+    <div id="successPopup" class="popup">
+        Registration Successful! 🎉<br>
+        Redirecting to login...
+    </div>
+
+    <!-- FORM -->
+    <form class="container" method="POST" id="regForm">
+        <h2>Create Account</h2>
+
+        <input type="text" name="fullname" placeholder="Full Name" required>
+
+        <input type="text" name="username" placeholder="Username" required>
+
+        <input type="email" name="email" placeholder="Email Address" required>
+
+        <!-- Password -->
+        <input type="password" id="password" name="password" placeholder="Password" oninput="checkStrength()" required>
+
+        <!-- Strength Meter -->
+        <div class="strength">
+            <div id="strengthBar" class="strength-bar"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required>
+
+        <button type="submit">Register</button>
+
+        <p class="login-link">
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+    </form>
+
+    <script>
+        /* PASSWORD STRENGTH CHECKER */
+        function checkStrength() {
+            let pw = document.getElementById("password").value;
+            let bar = document.getElementById("strengthBar");
+
+            let strength = 0;
+            if (pw.length > 6) strength++;
+            if (pw.match(/[A-Z]/)) strength++;
+            if (pw.match(/[0-9]/)) strength++;
+            if (pw.match(/[^A-Za-z0-9]/)) strength++;
+
+            let width = ["20%", "40%", "60%", "100%"][strength - 1] || "10%";
+            let color = ["red", "orange", "gold", "#00ff88"][strength - 1] || "red";
+
+            bar.style.width = width;
+            bar.style.background = color;
+        }
+
+        /* FORM VALIDATION */
+        document.getElementById("regForm").addEventListener("submit", function(e) {
+            let pw = document.getElementById("password").value;
+            let cpw = document.getElementById("confirm").value;
+
+            if (pw !== cpw) {
+                alert("Passwords do not match!");
+                e.preventDefault();
+            }
+        });
+
+        /* SHOW SUCCESS POPUP IF URL HAS success=1 */
+        if (window.location.search.includes("success=1")) {
+            let popup = document.getElementById("successPopup");
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 2000);
+        }
+    </script>
+
+</body>
+<!-- FLASH MESSAGE BOX -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</html>
