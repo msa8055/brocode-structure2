@@ -3,151 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroCode Dashboard</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Dashboard</title>
 
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at top, #1a1a1a, #000);
-            color: white;
-            font-family: 'Inter', sans-serif;
+            background: #050505;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        .grid {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(#222 1px, transparent 1px),
-                linear-gradient(90deg, #222 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.25;
-            z-index: -1;
-        }
-
-        /* ================= NAVBAR ================== */
+        /* ===== NAVBAR ===== */
         nav {
             width: 100%;
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(20,20,20,0.5);
-            border-bottom: 1px solid #222;
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(0,255,255,0.2);
+            font-family: 'Orbitron', sans-serif;
         }
 
-        nav a {
-            font-size: 20px;
-            margin-left: 25px;
-            color: #0ff;
+        nav .menu a {
+            margin-right: 25px;
+            color: cyan;
             text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
         }
-        nav a:hover { color: white; }
 
-        /* cards */
-        .container {
+        nav .menu a:hover {
+            color: white;
+            text-shadow: 0 0 8px cyan;
+        }
+
+        /* ===== FIXED PROFILE ICON ===== */
+        .profile-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid cyan;
+
+            /* ⭐ Correct folder path */
+            background: url('/static/profile_pics/{{ profile_pic }}') no-repeat center/cover;
+
+            box-shadow: 0 0 6px cyan;
+            margin-right: 80px; /* moved inside screen */
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px cyan;
+        }
+
+        /* ===== CONTAINER ===== */
+        .dashboard-container {
             text-align: center;
             margin-top: 80px;
         }
-        .welcome {
-            font-family: 'Orbitron';
-            font-size: 30px;
-            letter-spacing: 2px;
-        }
-        .subtitle { opacity: 0.7; margin-top: -5px; }
 
-        .cards {
+        .title {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 50px;
+        }
+
+        /* ===== CARDS ===== */
+        .card-container {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
+            gap: 35px;
+            margin-top: 20px;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .card {
-            width: 290px;
+            width: 300px;
             padding: 25px;
-            background: rgba(20,20,20,0.65);
-            border: 1px solid #333;
-            border-radius: 15px;
-            backdrop-filter: blur(12px);
-            transition: 0.25s;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(0,255,255,0.2);
+            box-shadow: 0 0 6px rgba(0,255,255,0.1);
+            transition: 0.3s;
         }
+
         .card:hover {
             transform: translateY(-6px);
-            border-color: #0ff;
-            box-shadow: 0 0 20px rgba(0,255,255,0.2);
+            box-shadow: 0 0 12px rgba(0,255,255,0.25);
         }
-        .card h3 { font-family: Orbitron; color: #0ff; }
-    </style>
-</head>
 
+        .card-title {
+            font-size: 22px;
+            color: cyan;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 15px;
+            opacity: 0.8;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
 <body>
 
-<div class="grid"></div>
-
-<!-- ==================== FIXED NAVBAR ===================== -->
-
+<!-- NAVBAR -->
 <nav>
-
-    <!-- LEFT MENU -->
-    <div style="display:flex; gap:25px;">
+    <div class="menu">
         <a href="/">Home</a>
         <a href="/dashboard">Dashboard</a>
         <a href="/logout">Logout</a>
     </div>
 
-    <!-- RIGHT PROFILE (clickable) -->
-    <div>
-        <a href="/profile">
-            {% if session.profile_pic %}
-                <img src="{{ url_for('static', filename='profile_pics/' + session.profile_pic) }}"
-                     style="width:55px;height:55px;border-radius:50%;object-fit:cover;
-                     border:2px solid #0ff;box-shadow:0 0 10px #0ff;">
-            {% else %}
-                <img src="{{ url_for('static', filename='profile_pics/default.png') }}"
-                     style="width:55px;height:55px;border-radius:50%;object-fit:cover;
-                     border:2px solid #0ff;box-shadow:0 0 10px #0ff;">
-            {% endif %}
-        </a>
-    </div>
-
+    <a href="/profile">
+        <div class="profile-icon"></div>
+    </a>
 </nav>
 
-<!-- ==================== MAIN CONTENT ===================== -->
+<!-- MAIN DASHBOARD -->
+<div class="dashboard-container">
 
-<div class="container">
+    <div class="title">Welcome, {{ username }} 👋</div>
+    <div class="subtitle">Your personal coding dashboard — choose where to start.</div>
 
-    <div class="welcome">
-        Welcome, {{ session['username'] }} 👋
-    </div>
+    <div class="card-container">
 
-    <p class="subtitle">Your personal coding dashboard — choose where to start.</p>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>🚀 Start Learning</h3>
-            <p>Access coding lessons, challenges, and interactive content.</p>
-        </div>
-
-        <div class="card">
-            <h3>📊 Track Progress</h3>
-            <p>View your completed modules and performance analytics.</p>
-        </div>
-
-        <a href="/profile" style="text-decoration:none;color:inherit;">
+        <!-- Start Learning -->
+        <a href="/stages">
             <div class="card">
-                <h3>👤 Profile</h3>
-                <p>Update info, change password, personalize account.</p>
+                <div class="card-title">🚀 Start Learning</div>
+                <p>Access coding lessons, challenges, and interactive content.</p>
+            </div>
+        </a>
+
+        <!-- Track Progress -->
+        <a href="/progress">
+            <div class="card">
+                <div class="card-title">📊 Track Progress</div>
+                <p>View your completed modules and performance analytics.</p>
+            </div>
+        </a>
+
+        <!-- Profile -->
+        <a href="/profile">
+            <div class="card">
+                <div class="card-title">👤 Profile</div>
+                <p>Update your info, password, and account settings.</p>
             </div>
         </a>
 
     </div>
-
 </div>
 
 </body>

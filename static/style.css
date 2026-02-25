@@ -1,0 +1,33 @@
+.stage-grid {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.stage-card {
+    background: #1f1f1f;
+    border-radius: 12px;
+    padding: 25px;
+    cursor: pointer;
+    transition: 0.25s;
+    border: 1px solid #333;
+}
+
+.stage-card:hover {
+    transform: scale(1.04);
+    border-color: #6a5acd;
+    box-shadow: 0 0 18px rgba(120,80,255,0.4);
+}
+
+.stage-number {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.stage-desc {
+    margin-top: 10px;
+    color: #ccc;
+    font-size: 16px;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stages | BroCode</title>
+    <style>
+        body {
+            background: #0d1117;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .stage-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .stage-card {
+            background: #161b22;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #30363d;
+            transition: 0.2s;
+        }
+        .stage-card:hover {
+            transform: scale(1.05);
+            border-color: #58a6ff;
+            box-shadow: 0 0 12px #58a6ff;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        .stage-num {
+            font-size: 35px;
+            font-weight: bold;
+            color: #58a6ff;
+        }
+        .tag {
+            background: #21262d;
+            padding: 5px 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: inline-block;
+            border: 1px solid #30363d;
+        }
+    </style>
+</head>
+<body>
+
+<a href="/dashboard" style="color:#0af; font-size:18px;">⬅ Back</a>
+
+<h1>🚀 BroCode Learning Stages</h1>
+
+<div class="stage-container">
+
+    {% for i in range(1, 8) %}
+    <a href="/stage/{{ i }}">
+        <div class="stage-card">
+            <div class="stage-num">Stage {{ i }}</div>
+            <div class="tag">
+                {% if i == 1 %} 👶 Beginner Basics
+                {% elif i == 2 %} 🟢 Easy Logic
+                {% elif i == 3 %} 🔵 Medium DSA
+                {% elif i == 4 %} 🟣 Advanced Concepts
+                {% elif i == 5 %} 🔥 Hard Algorithms
+                {% elif i == 6 %} ⚔️ Pro Level
+                {% elif i == 7 %} 👑 Grandmaster Elite
+                {% endif %}
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

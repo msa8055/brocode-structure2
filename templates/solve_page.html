@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Solve {{ problem['title'] }} - BroCode</title>
+    <style>
+        body {
+            background:#111;
+            color:white;
+            font-family:'Orbitron', sans-serif;
+            padding:20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        textarea {
+            width:100%;
+            height:300px;
+            background:#000;
+            color:#0f0;
+            font-family: monospace;
+            padding:15px;
+            border-radius:10px;
+            border:1px solid #333;
+            font-size:15px;
+        }
+        .output-box {
+            background:#1a1a1a;
+            padding:15px;
+            margin-top:20px;
+            border-radius:10px;
+            border:1px solid #333;
+            white-space: pre-wrap;
+        }
+        button {
+            padding:12px 25px;
+            font-size:18px;
+            background:#0af;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+
+<a href="/problem/{{ problem['id'] }}" style="color:#0af;">⬅ Back</a>
+
+<div class="container">
+
+    <h1>{{ problem['title'] }}</h1>
+
+    <form method="POST">
+        <textarea name="code" placeholder="# Write Python Code Here...">{{ code }}</textarea>
+        <br>
+        <button type="submit">Run Code</button>
+    </form>
+
+    {% if output %}
+    <div class="output-box">
+        <h3>Output:</h3>
+        {{ output }}
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stage {{ stage_number }} - BroCode</title>
+</head>
+<body style="background:#111; color:white; padding:20px;font-family: 'Orbitron', sans-serif;">
+
+    <a href="/stages" style="color:#0af; font-size:18px;">⬅ Back</a>
+
+    <h1>Stage {{ stage_number }}</h1>
+    <hr>
+
+    {% if problems %}
+        {% for p in problems %}
+            <a href="/problem/{{ p['id'] }}" style="text-decoration:none; color:white;">
+                <div style="padding:15px; margin:10px 0; border:1px solid #444; background:#1a1a1a; border-radius:8px;">
+                    <h3>{{ p['title'] }}</h3>
+                    <p>Difficulty: {{ p['difficulty'] }}</p>
+                    <p>XP: {{ p['xp'] }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>No problems found for this stage.</p>
+    {% endif %}
+
+</body>
+</html>
