@@ -73,7 +73,45 @@
 </head>
 
 <body>
-    <a href="/stage/{{ problem.stage }}" style="color:#0af; padding:20px; display:block;">⬅ Back</a>
+    <a href="/stage/{{ problem.stage }}" style="color:#0af; font-size:22px; padding:20px; display:block;">⬅ Back</a>
+    {% if problem.id < 16 %}
+    <a href="/problem/{{ problem.id + 1 }}">
+        <button style="
+            background:#4dff4d; 
+            color:black; 
+            padding:8px 14px; 
+            font-size:16px; 
+            border:none; 
+            border-radius:5px;
+            position:fixed; 
+            bottom:20px; 
+            right:20px;
+            cursor:pointer;
+        ">
+            Next ➡
+        </button>
+    </a>
+{% endif %}
+
+    {% if problem.id > 1 %}
+    <a href="/problem/{{ problem.id - 1 }}">
+        <button style="
+            background:#ff4d4d;
+            color:black; 
+            padding:8px 14px; 
+            font-size:16px; 
+            border:none; 
+            border-radius:5px;
+            position:fixed; 
+            bottom:20px; 
+            left:20px;
+            cursor:pointer;
+        ">
+            ⬅ Back
+        </button>
+    </a>
+{% endif %}
+
 
     <div class="container">
         
